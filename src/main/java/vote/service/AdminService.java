@@ -1,32 +1,31 @@
 package vote.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import vote.dao.AdminDao;
-import vote.dao.GameDao;
-import vote.entity.Game;
+import vote.entity.Admin;
 
 @Service
 public class AdminService {
 	@Autowired
 	private AdminDao adminDao;
-	@Autowired
-	private GameDao gameDao;
-	public int AdminLogin(String admin_name,String admin_pass) {
-		int i=adminDao.AdminLogin(admin_name, admin_pass);
-		return i;
+	public Admin AdminLogin(Admin admin) {
+		return adminDao.AdminLogin(admin);
+	
 	}
-	public int Addgame(Game game) {
-		int i=gameDao.insertgame(game);
-	    return i;
+	
+	public List<Admin> getAdmins() {
+		return adminDao.getAdmins();
 	}
-	public int delgame(String gamename) {
-		int i =gameDao.delgame(gamename);
-		return i;
+	
+	public int delAdmin(int id) {
+		return adminDao.delAdmin(id);
 	}
-	public int update(Game game) {
-		int i =gameDao.updategame(game);
-		return i;
+	
+	public int addAdmin(Admin admin) {
+		return adminDao.addAdmin(admin);
 	}
 }

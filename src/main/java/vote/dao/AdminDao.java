@@ -1,6 +1,13 @@
 package vote.dao;
 
-public interface AdminDao {
-	int AdminLogin(String admin_name,String admin_pass);
 
+import java.util.List;
+
+import vote.entity.Admin;
+
+public interface AdminDao {
+	Admin AdminLogin(Admin admin);
+	List<Admin> getAdmins();
+	int delAdmin(int id);
+	int addAdmin(Admin admin);
 }
