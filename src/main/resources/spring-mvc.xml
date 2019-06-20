@@ -13,6 +13,7 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 

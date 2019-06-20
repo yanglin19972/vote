@@ -20,9 +20,9 @@ public class LoginController {
 	public ResultMsg login(String admin_name,String admin_pass) {
 		int i=adminService.AdminLogin(admin_name, admin_pass);
 		if(i>0){
-			return new ResultMsg(1,"µÇÂ¼³É¹¦");
+			return new ResultMsg(1,"ç™»é™†æˆåŠŸ");
 		}else {
-			return new ResultMsg(0,"µÇÂ¼Ê§°Ü");
+			return new ResultMsg(0,"ç™»é™†å¤±è´¥");
 		}
 	}
 }
