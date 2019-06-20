@@ -73,9 +73,9 @@
     		var param = $("#form").serialize();
     		$.post(url, param, function(data) {
     			if(data.flag==1){
-    				alert(data.msg+"请关闭当前窗口刷新页面查看");
+    				alert(data.msg+"请关闭当前窗口刷新页面查看！！");
     			}else{
-    				alert("登录失败"+data.msg);
+    				alert(data.msg);
     			}
     		});
     	}

@@ -71,9 +71,9 @@ public class IndexController {
 		System.out.println(adminname);
 		int i=adminService.addAdmin(admin);
 		if(i>0){
-			return new ResultMsg(1,"添加成功");
+			return new ResultMsg(1,"添加成功：");
 		}else{
-			return new ResultMsg(0,"添加成功");
+			return new ResultMsg(0,"添加失败！");
 		}
 	}
 	
