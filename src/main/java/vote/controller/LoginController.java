@@ -13,7 +13,7 @@ import vote.entity.ResultMsg;
 import vote.service.AdminService;
 
 @Controller
-@RequestMapping("/admin/jsp")
+
 public class LoginController {
 
 	@Autowired
@@ -22,7 +22,7 @@ public class LoginController {
 	@RequestMapping("/login")
 	@ResponseBody
 	public ModelAndView login(){
-		ModelAndView mv=new ModelAndView("admin/jsp/login");
+		ModelAndView mv=new ModelAndView("login");
 		return mv;
 	}
 	

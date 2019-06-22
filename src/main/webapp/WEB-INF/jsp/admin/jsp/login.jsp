@@ -37,12 +37,12 @@
 
     <script>
     function login() {
-		var url = "${pageContext.request.contextPath}/admin/jsp/login_submit";
+		var url = "${pageContext.request.contextPath}/login_submit";
 		var param = $("#form").serialize();
 		$.post(url, param, function(data) {
 			if(data.flag==1){
 				alert("登录成功"+data.msg);
-				location.href="${pageContext.request.contextPath}/admin/jsp/index";
+				location.href="${pageContext.request.contextPath}/index";
 			}else{
 				alert("登录失败"+data.msg);
 			}

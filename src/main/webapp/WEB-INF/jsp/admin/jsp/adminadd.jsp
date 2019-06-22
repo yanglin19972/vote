@@ -69,14 +69,18 @@
         </div>
         <script>
         function addAdmin() {
-    		var url = "${pageContext.request.contextPath}/admin/jsp/addAdmin";
+    		var url = "${pageContext.request.contextPath}/addAdmin";
     		var param = $("#form").serialize();
     		$.post(url, param, function(data) {
     			if(data.flag==1){
-    				alert(data.msg+"请关闭当前窗口刷新页面查看！！");
+    				var index = parent.layer.getFrameIndex(window.name); 
+    				parent.layer.close(index);
+    				location.href="${pageContext.request.contextPath}/adminlist";
+    				
     			}else{
     				alert(data.msg);
     			}
+    			
     		});
     	}
         </script>

@@ -22,6 +22,14 @@
           <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
             <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
         </div>
+        <div class="x-nav">
+        	<select>
+        			<option value ="选择比赛">选择比赛</option>
+				  <option value ="saab">Saab</option>
+				  <option value="opel">Opel</option>
+				  <option value="audi">Audi</option>
+        	</select>
+        </div>
         <div class="layui-fluid">
             <div class="layui-row layui-col-space15">
                 <div class="layui-col-md12">
@@ -33,7 +41,6 @@
                                     
                                     <th>选手</th>
                                     <th>作品</th>
-                                    <th>比赛</th>
                                     <th>票数</th>
                                     <th>排名</th>
                                     </tr>
@@ -43,7 +50,6 @@
                                    
                                     <td>邓紫棋</td>
                                     <td>妮妮</td>
-                                    <td>中国好声音</td>
                                     <td>520</td>
                                   	<td>1</td>
                                     

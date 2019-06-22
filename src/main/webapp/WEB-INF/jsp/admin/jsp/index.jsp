@@ -65,7 +65,7 @@
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                              <li>
-                                <a onclick="xadmin.add_tab('所有投票','playerTlist')">
+                                <a onclick="xadmin.add_tab('所有投票','${pageContext.request.contextPath}/playerTlist')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>选手得票</cite></a>
                             </li>
@@ -83,7 +83,7 @@
                     <li>
                         
                             <li>
-                                <a onclick="xadmin.add_tab('投票信息','categories')">
+                                <a onclick="xadmin.add_tab('投票信息','${pageContext.request.contextPath}/show')">
                                     <i class="iconfont">&#xe6ba;</i>
                                     <cite>选手管理</cite></a>
                             </li>
@@ -106,7 +106,7 @@
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>
-                                <a onclick="xadmin.add_tab('管理员列表','adminlist')">
+                                <a onclick="xadmin.add_tab('管理员列表','${pageContext.request.contextPath}/adminlist')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>管理员列表</cite></a>
                             </li>

@@ -21,7 +21,7 @@
                     <div class="layui-card">
                         <div class="layui-card-body ">
                            <div class="layui-card-header">
-                            <button class="layui-btn" onclick="xadmin.open('添加用户','./player_add.jsp',500,600)"><i class="layui-icon"></i>添加选手</button>
+                            <button class="layui-btn" onclick="xadmin.open('添加用户','.playeradd',500,600)"><i class="layui-icon"></i>添加选手</button>
                        	   </div>
                        	    
                             <hr>

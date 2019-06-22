@@ -1,5 +1,6 @@
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="x-admin-sm">
     
@@ -22,32 +23,18 @@
     </head>
 
     <body>
-        <div class="x-nav">
-            <span class="layui-breadcrumb">
-                <a href="">首页</a>
-                <a href="">演示</a>
-                <a>
-                    <cite>导航元素</cite></a>
-            </span>
-            <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
-                <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i>
-            </a>
-        </div>
         <div class="layui-fluid">
             <div class="layui-row layui-col-space15">
                 <div class="layui-col-md12">
                     <div class="layui-card">
-                        <div class="layui-card-body ">
-                           
-                                <div class="layui-card-header">
-                                    <button class="layui-btn" onclick="xadmin.open('添加用户','playadd',500,600)"><i class="layui-icon"></i>添加</button>
-                                </div>
-                            
-                            <hr>
-                        </div>
+                        
                         <div class="layui-card-header">
                             <button class="layui-btn layui-btn-danger" onclick="delAll()">
                                 <i class="layui-icon"></i>批量删除</button>
+                                <button class="layui-btn" onclick="xadmin.open('添加比赛','playadd',500,600)"><i class="layui-icon"></i>添加</button>
+                        <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
+			                <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i>
+			            </a>
                         </div>
                         <div class="layui-card-body ">
                             <table class="layui-table layui-form" style="text-align: center;">
@@ -55,31 +42,33 @@
                                   <th width="10" style="text-align: center;">
                                     <input type="checkbox" name="" lay-skin="primary">
                                   </th>
-                                  <th width="15" style="text-align: center;">比赛ID</th>
-                                  <th width="15" style="text-align: center;">比赛</th>
-                                  <th width="50" style="text-align: center;">参赛人数</th>
+                                  <th style="text-align: center;">比赛ID</th>
+                                  <th style="text-align: center;">比赛名称</th>
                                   <th style="text-align: center;">状态</th>
                                   <th style="text-align: center;">操作</th>
                               </thead>
                               <tbody class="x-cate">
-                                <tr cate-id='1' fid='0' >
-                                  <td rowspan="2">
-                                    <input type="checkbox" name="" lay-skin="primary">
-                                  </td>
-                                  <td rowspan="2">1</td>
-                                  <td>中国好声音</td>
-                                  <td>500</td>
-                                  
-                                  
-                                  <td rowspan="2">
-                                    <input type="checkbox" name="switch"  lay-text="开启投票|停止投票"  checked="" lay-skin="switch">
-                                  </td>
-                                  <td rowspan="2" class="td-manage">
-                                    <button class="layui-btn-danger layui-btn layui-btn-xs"  onclick="member_del(this,'要删除的id')" href="javascript:;" ><i class="layui-icon">&#xe640;</i>删除</button>
-                                  </td>
-                                </tr>
-                                
-                                
+                                <c:forEach items="${plays}" var="item">
+                                	<tr>
+                                	<td>
+                                      <input style="text-align: center;" type="checkbox" name="id" value="1"   lay-skin="primary"> 
+                                    </td>
+									<th style="text-align: center;">${item.play_id}</th>
+									<th style="text-align: center;">${item.playname}</th>
+									
+                                  	<th style="text-align: center;">
+									<c:if test="${item.condition==1}">
+	                                    <input  type="checkbox" name="switch"  lay-text="开启投票|停止投票"  checked=""  lay-skin="switch">
+									</c:if>
+									<c:if test="${item.condition==0}">
+										<input type="checkbox" name="switch"  lay-text="开启投票|停止投票"   lay-skin="switch">
+									</c:if>
+									</th>
+	                                  <td  class="td-manage">
+	                                    <button style="text-align: center;" class="layui-btn-danger layui-btn layui-btn-xs"  onclick="member_del(this,'要删除的id')" href="javascript:;" ><i class="layui-icon">&#xe640;</i>修改</button>
+	                                    <button style="text-align: center;" class="layui-btn-danger layui-btn layui-btn-xs"  onclick="delPlay('${item.play_id}')" href="javascript:;" ><i class="layui-icon">&#xe640;</i>删除</button>
+	                                  </td>
+								</c:forEach>
                               </tbody>
                             </table>
                         </div>
@@ -99,31 +88,24 @@
             </div>
         </div>
         <script>
-          layui.use(['form'], function(){
+        layui.use(['form'], function(){
             form = layui.form;
-            
           });
-
-           /*用户-删除*/
-          function member_del(obj,id){
-              layer.confirm('确认要删除吗？',function(index){
-                  //发异步删除数据
-                  $(obj).parents("tr").remove();
-                  layer.msg('已删除!',{icon:1,time:1000});
-              });
-          }
-
-          
-
-          var cateIds = [];
-          function getCateId(cateId) {
-              $("tbody tr[fid="+cateId+"]").each(function(index, el) {
-                  id = $(el).attr('cate-id');
-                  cateIds.push(id);
-                  getCateId(id);
-              });
-          }
-   
+        
+        function delPlay(id){
+        	var result=confirm("您确定要删除吗？");
+        	if(result){
+        		//返回的true  发送ajax请求
+        		var url="${pageContext.request.contextPath}/delPlay";
+        		var param={id:id};
+        		$.post(url,param,function(data){
+        			alert(data.msg);
+        			if(data.flag==1){
+        				location.reload();
+        			}
+        		});
+        	}
+        }
         </script>
     </body>
 </html>

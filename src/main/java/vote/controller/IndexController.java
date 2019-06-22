@@ -1,5 +1,6 @@
 package vote.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,34 +10,38 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import vote.entity.Admin;
+import vote.entity.Play;
 import vote.entity.ResultMsg;
 import vote.service.AdminService;
+import vote.service.PlayService;
 
 @Controller
-@RequestMapping("/admin/jsp")
+
 public class IndexController {
 
 	@Autowired
 	public AdminService adminService;
+	@Autowired
+	public PlayService playService;
 	
 	@RequestMapping("/index")
 	@ResponseBody
 	public ModelAndView index(){
-		ModelAndView mv=new ModelAndView("admin/jsp/index");
+		ModelAndView mv=new ModelAndView("index");
 		return mv;
 	}
 	
 	@RequestMapping("/addmatch")
 	@ResponseBody
 	public ModelAndView addmatch(){
-		ModelAndView mv=new ModelAndView("admin/jsp/addmatch");
+		ModelAndView mv=new ModelAndView("addmatch");
 		return mv;
 	}
 	
 	@RequestMapping("/adminadd")
 	@ResponseBody
 	public ModelAndView adminadd() {
-		ModelAndView mv=new ModelAndView("admin/jsp/adminadd");
+		ModelAndView mv=new ModelAndView("adminadd");
 		return mv;
 	}
 	
@@ -45,7 +50,8 @@ public class IndexController {
 	@ResponseBody
 	public ModelAndView adminlist() {
 		List<Admin> admins=adminService.getAdmins();
-		ModelAndView mv=new ModelAndView("admin/jsp/adminlist");
+		ModelAndView mv=new ModelAndView("adminlist");
+		Collections.reverse(admins);
 		mv.addObject("admins",admins);
 		return mv;
 	}
@@ -80,49 +86,66 @@ public class IndexController {
 	@RequestMapping("/cate")
 	@ResponseBody
 	public ModelAndView cate() {
-		ModelAndView mv=new ModelAndView("admin/jsp/cate");
-		return mv;
+		ModelAndView mv=new ModelAndView("cate");
+		List<Play> plays=playService.getPlays();
+		   Collections.reverse(plays);
+		   mv.addObject("plays", plays);	  
+		   return mv;
 	}
+	
+	//É¾³ý±ÈÈü
+	@RequestMapping("/delPlay")
+	@ResponseBody
+	public ResultMsg delPlay(Integer id) {
+		System.out.println(id);
+		int i=playService.delPlay(id);
+		if(i>0){
+			return new ResultMsg(1,"É¾³ý³É¹¦");
+		}else{
+			return new ResultMsg(0,"É¾³ýÊ§°Ü");
+		}
+	}
+	
 	
 	@RequestMapping("/categories")
 	@ResponseBody
 	public ModelAndView categories() {
-		ModelAndView mv=new ModelAndView("admin/jsp/categories");
+		ModelAndView mv=new ModelAndView("categories");
 		return mv;
 	}
 	
 	@RequestMapping("/error")
 	@ResponseBody
 	public ModelAndView error() {
-		ModelAndView mv=new ModelAndView("admin/jsp/error");
+		ModelAndView mv=new ModelAndView("error");
 		return mv;
 	}
 	
 	@RequestMapping("/memberlist")
 	@ResponseBody
 	public ModelAndView memberlist() {
-		ModelAndView mv=new ModelAndView("admin/jsp/memberlist");
+		ModelAndView mv=new ModelAndView("memberlist");
 		return mv;
 	}
 	
 	@RequestMapping("/playadd")
 	@ResponseBody
 	public ModelAndView playadd() {
-		ModelAndView mv=new ModelAndView("admin/jsp/playadd");
+		ModelAndView mv=new ModelAndView("playadd");
 		return mv;
 	}
 	
 	@RequestMapping("/playeradd")
 	@ResponseBody
 	public ModelAndView playeradd() {
-		ModelAndView mv=new ModelAndView("admin/jsp/playeradd");
+		ModelAndView mv=new ModelAndView("playeradd");
 		return mv;
 	}
 	
 	@RequestMapping("/playerTlist")
 	@ResponseBody
 	public ModelAndView playerTlist() {
-		ModelAndView mv=new ModelAndView("admin/jsp/playerTlist");
+		ModelAndView mv=new ModelAndView("playerTlist");
 		return mv;
 	}
 }

@@ -1,5 +1,6 @@
-<%@page contentType="text/html"%>
-<%@page pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="x-admin-sm">
     
@@ -9,11 +10,11 @@
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-        <link rel="stylesheet" href="<%=request.getContextPath() %>/css/font.css">
-        <link rel="stylesheet" href="<%=request.getContextPath() %>/css/xadmin.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/font.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/xadmin.css">
         <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-        <script src="<%=request.getContextPath() %>/lib/layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="<%=request.getContextPath() %>/js/xadmin.js"></script>
+        <script src="${pageContext.request.contextPath}/lib/layui/layui.js" charset="utf-8"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/js/xadmin.js"></script>
     </head>
 
     <body>
@@ -39,9 +40,7 @@
                         <div class="layui-card-header">
                             <button class="layui-btn layui-btn-danger" onclick="delAll()">
                                 <i class="layui-icon"></i>批量删除</button>
-                                 <button class="layui-btn" onclick="xadmin.open('添加选手','playeradd',500,600)"><i class="layui-icon"></i>添加选手</button>
-                                <button class="layui-btn layui-btn-danger" onclick="add()">
-                                <i class="layui-icon "></i>excel批量添加</button>
+                                <button class="layui-btn" onclick="xadmin.open('添加用户','${pageContext.request.contextPath}/admin/addplayer',500,600)"><i class="layui-icon"></i>添加选手</button>
                         </div>
                         <div class="layui-card-body ">
                             <table class="layui-table layui-form" style="text-align: center;">
@@ -55,15 +54,17 @@
                                   <th width="100" style="text-align: center;">操作</th>
                               </thead>
                               <tbody class="x-cate">
+                              <c:forEach items="${shows}" var="item">
                                 <tr cate-id='1' fid='0' >
                                 	<th width="10" style="text-align: center;">
                                     <input type="checkbox" name="" lay-skin="primary">
                                   </th>
-                                  <td>邓紫棋</td>
-                                  <td>来自天堂的魔鬼</td>
-                                  <td>中国好声音总决赛</td>
+                                  <td>${item.player.playername}</td>
+                                  <td>${item.production.production_name}</td>
+                                  <td>${item.play.playname}</td>
                                   <td><button class="layui-btn layui-btn-danger">修改 </button> <button class="layui-btn layui-btn-danger"> 删除</button></td>
-                                </tr>
+                                </tr>		
+		            </c:forEach>
                               </tbody>
                             </table>
                         </div>

@@ -26,7 +26,7 @@
                     <div class="layui-card">
                         <div class="layui-card-header">
                             <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-                            <button class="layui-btn" onclick="xadmin.open('添加管理员','adminadd',500,600)"><i class="layui-icon"></i>添加</button>
+                            <button class="layui-btn" onclick="xadmin.open('添加管理员','${pageContext.request.contextPath}/adminadd',500,600)"><i class="layui-icon"></i>添加</button>
                         	<button class="layui-btn" onclick="location.reload()">刷新页面</button>
                         </div>
                         <div class="layui-card-body ">
@@ -61,7 +61,7 @@
     	var result=confirm("您确定要删除吗？");
     	if(result){
     		//返回的true  发送ajax请求
-    		var url="${pageContext.request.contextPath}/admin/jsp/delAdmin";
+    		var url="${pageContext.request.contextPath}/delAdmin";
     		var param={id:id};
     		$.post(url,param,function(data){
     			alert(data.msg);

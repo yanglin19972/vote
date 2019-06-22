@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vote.dao.PlayerDao">
+<resultMap type="vote.entity.show" id="show">
+       <id property="pk_id" column="pk_id"/>
+		<result property="player_id" column="player_id"/>
+		<result property="play_id" column="play_id"/>
+		<result property="usert_id" column="usert_id"/>
+		<association property="player" javaType="vote.entity.Player">
+			<id property="player_id" column="player_id"/>
+			<result property="playername" column="playername"/>
+			<result property="playerpic" column="playerpic"/>
+			<result property="tel" column="tel"/>
+			<result property="sex" column="sex"/>
+		</association>
+		<association property="play" javaType="vote.entity.Play">
+		<id property="play_id" column="play_id"/>
+			<result property="playname" column="playname"/>
+			<result property="condition" column="condition"/>
+		</association>
+		<association property="production" javaType="vote.entity.production">
+		<id property="production_name" column="production_name"/>
+			<result property="player_id" column="player_id"/>
+		</association>
+</resultMap>
+    <select id="findpk" resultMap="show">
+     select * from pk p
+    left join player pl on pl.player_id=p.player_id
+    left join production pr on p.player_id=pr.player_id
+    left join play pla ON pla.play_id=p.play_id
+    </select>
+	<select id="findplayer" resultType="vote.entity.Player">
+		select * from player 
+	</select>
+	<select id="findplay" resultType="vote.entity.Play">
+	    select * from play
+	</select>
+	<insert id="insertgame" parameterType="vote.entity.Player" >
+		insert into player(playername,playerpic,tel,sex)
+		values(#{playername},#{playerpic},#{tel},#{sex})
+	</insert>
+	<insert id="insertproduction" parameterType="vote.entity.production">
+		insert into production(production_name,player_id)
+		values(#{production_name},#{player_id})
+	</insert>
+	<delete id="delgame" parameterType="String">
+	delete from player where playername=#{playname}
+	</delete>
+	<update id="updategame" parameterType="vote.entity.Player">
+	 update player 
+ <set>
+
+
+ <if test="playerpic!=null">
+  , playerpic=#{playerpic}
+ </if>
+ <if test="tel!=null">
+  , tel=#{tel}
+ </if>
+ <if test="sex!=null">
+ , sex=#{sex}
+ </if>
+ </set>
+ <where>
+ playername=#{playername}
+ </where>
+</update>
+	
+</mapper>
