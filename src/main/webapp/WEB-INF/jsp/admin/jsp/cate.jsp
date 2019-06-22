@@ -57,16 +57,16 @@
 									<th style="text-align: center;">${item.playname}</th>
 									
                                   	<th style="text-align: center;">
-									<c:if test="${item.condition==1}">
-	                                    <input  type="checkbox" name="switch"  lay-text="开启投票|停止投票"  checked=""  lay-skin="switch">
+									<c:if test="${item.state==1}">
+	                                    <input  type="checkbox" id="${item.play_id}" onclick="updateState'${item.play_id}')" name="switch"  lay-text="开启投票|停止投票"  checked=""  lay-skin="switch">
 									</c:if>
-									<c:if test="${item.condition==0}">
-										<input type="checkbox" name="switch"  lay-text="开启投票|停止投票"   lay-skin="switch">
+									<c:if test="${item.state==0}">
+										<input type="checkbox"  id="${item.play_id}" onclick="updateState'${item.play_id}')" name="switch"  lay-text="开启投票|停止投票"   lay-skin="switch">
 									</c:if>
 									</th>
 	                                  <td  class="td-manage">
-	                                    <button style="text-align: center;" class="layui-btn-danger layui-btn layui-btn-xs"  onclick="member_del(this,'要删除的id')" href="javascript:;" ><i class="layui-icon">&#xe640;</i>修改</button>
-	                                    <button style="text-align: center;" class="layui-btn-danger layui-btn layui-btn-xs"  onclick="delPlay('${item.play_id}')" href="javascript:;" ><i class="layui-icon">&#xe640;</i>删除</button>
+	                                    <button style="text-align: center;" class="layui-btn-danger layui-btn layui-btn-xs"  onclick="member_del(this,'要删除的id')" href="javascript:;" >修改</button>
+	                                    <button style="text-align: center;" class="layui-btn-danger layui-btn layui-btn-xs"  onclick="delPlay('${item.play_id}')" href="javascript:;" >删除</button>
 	                                  </td>
 								</c:forEach>
                               </tbody>
@@ -106,6 +106,19 @@
         		});
         	}
         }
+        
+        function updateState(id){
+        		var url="${pageContext.request.contextPath}/delPlay";
+        		var param={id:id};
+        		$.post(url,param,function(data){
+        			alert(data.msg);
+        			if(data.flag==1){
+        				location.reload();
+        			}
+        		});
+        }
+        
+        
         </script>
     </body>
 </html>
