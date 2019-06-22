@@ -106,6 +106,23 @@ public class IndexController {
 		}
 	}
 	
+	//添加比赛
+	@RequestMapping("/addPlay")
+	@ResponseBody
+	public ResultMsg addPlay(String playname,Integer state) {
+		Play play=new Play();
+		play.setPlayname(playname);
+		play.setState(state);
+		System.out.println(playname);
+		System.out.println(state);
+		int i=playService.addPlay(play);
+		if(i>0){
+			return new ResultMsg(1,"添加成功：");
+		}else{
+			return new ResultMsg(0,"添加失败！");
+		}
+	}
+	
 	
 	@RequestMapping("/categories")
 	@ResponseBody
@@ -118,6 +135,14 @@ public class IndexController {
 	@ResponseBody
 	public ModelAndView error() {
 		ModelAndView mv=new ModelAndView("error");
+		return mv;
+	}
+	
+	//进入修改比赛页面
+	@RequestMapping("/playstateupdate")
+	@ResponseBody
+	public ModelAndView playstateupdate() {
+		ModelAndView mv=new ModelAndView("playstateupdate");
 		return mv;
 	}
 	

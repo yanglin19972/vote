@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import vote.dao.PlayDao;
+import vote.entity.Admin;
 import vote.entity.Play;
 
 @Service
@@ -18,5 +19,9 @@ public class PlayService {
 	
 	public int delPlay(int id) {
 		return playDao.delPlay(id);
+	}
+	
+	public int addPlay(Play play) {
+		return playDao.addPlay(play);
 	}
 }
