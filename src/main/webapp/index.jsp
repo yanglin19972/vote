@@ -28,7 +28,7 @@
         <!-- 顶部开始 -->
         <div class="container">
             <div class="logo">
-                <a href="./index.jsp">在线投票后台管理</a></div>
+                <a href="<%=request.getContextPath() %>index.jsp">在线投票后台管理0</a></div>
             <div class="left_open">
                 <a><i title="展开左侧栏" class="iconfont">&#xe699;</i></a>
             </div>
